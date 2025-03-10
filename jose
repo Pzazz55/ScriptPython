@@ -1,0 +1,2404 @@
+L55_LambdaExpressions_MapandFilters.py
+
+'''
+Lambda Expressions are a quick way to create Anonymous Functions. A one-time use functions
+that we don't need to name and just use it one-time only, and are never reference again.
+Lamda Expressions should be used when they can be easily read - if we have to come back to
+the code later.
+
+Map Function (Built-In Function) - A map function passes the function that every single
+element/item in the list.
+
+Filter Function (Built-In Function) - A filter function returns the iterator
+yielding those items of the iterable for which we pass in the item to the function which
+is True. This means we need to filter by a function which either returns a True or False.
+'''
+
+#Program 1
+def square(num):
+    return num**2
+
+print("***** Program to demonstrate Map Function *****")
+my_nums = [1, 2, 3, 4, 5]
+#a map function passes the function that every single element/item in the list.
+map(square, my_nums) #returns a memory location
+
+#Approach 1
+print("Approach # 1")
+for item in map(square, my_nums):
+    print(item)
+
+#Approach 2
+print("Approach # 2")
+print(list(map(square, my_nums))) #returns the list
+
+#Program 2
+def splicer(mystring):
+    if len(mystring) % 2 == 0:
+        return 'EVEN'
+    else:
+        return mystring[0]
+
+print("***** Program to demonstrate Map Function *****")
+names = ['Andy', 'Eve', 'Sally']
+print(list(map(splicer, names)))
+
+#Program 3
+def check_even(num):
+    return num % 2 == 0
+
+print("***** Program to demonstrate Filter Function *****")
+mynums = [1, 2, 3, 4, 5, 6]
+
+#map applies the function to every item in the list.
+#filter instead will go and filter based of the function condition.
+
+#Approach 1
+print("Approach # 1")
+for n in filter(check_even, mynums):
+    print(n)
+
+#Approach 2
+print("Approach # 2")
+print(list(filter(check_even, mynums)))
+
+#Program 4
+print("***** Program to demonstrate Lambda Function *****")
+print("Approach # 1")
+def square(num):
+    res = num ** 2
+    return res
+
+print(square(3))
+
+print("Approach # 2")
+square = lambda num: num ** 2
+print(square(3))
+
+#Program 5
+print("***** Program to demonstrate Lambda Function along with Map/Filter *****")
+
+print("Lambda with Map Function")
+mynums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+print(list(map(lambda num: num ** 2, mynums)))
+
+print("Lambda with Filter Function")
+#Program with lambda and filter function to print the even numbers.
+mynums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+print(list(filter(lambda num: num % 2 == 0, mynums)))
+
+#Program with lambda and map function to print the first letter of a list.
+names = ['Andy', 'Eve', 'Sally']
+print(list(map(lambda str: str[0], names)))
+
+#Program with lambda and map function to reverse and print the names.
+names = ['Andy', 'Eve', 'Sally']
+print(list(map(lambda str: str[::-1], names)))
+
+=============================================================================================================================================================================================
+L56_NestedStatements_Scope.py
+
+'''
+The variable names that are assigned are stored in a Namespace.
+The variable names also have a scope. Scope means the visibility of the variable name to
+other parts of the code.
+
+LEGB Rules (the order in which Python checks for the Variables)
+----------------------------------------------------------
+L: Local - Names assigned in any way within a function (def or lambda), and not declared
+global in that function.
+E: Enclosing Function Locals - Names in the local scope of any and all enclosing functions
+(def or lambda), from inner to outer.
+G: Global (Module) - Names assigned at the top-level of a module file, or declared global
+in a def within the file.
+B: Built-In (Module) - Names preassigned in the built-in names module: open, range,
+syntaxerror, str, etc. (built-in keywords)
+
+'''
+
+#Program 1
+print("****** Example of a Local Variable ******")
+squ = lambda num: num ** 2 #num is a Local Variable.
+print(squ(2))
+
+#Program 2
+print("****** Example of a Enclosing Functional Local Variable ******")
+#This is a Global Variable
+name = 'THIS IS A GLOBAL STRING'
+
+def greet():
+    #This is an Enclosing Function Variable
+    name = 'SAMMY'
+
+    def hello():
+        name = 'THIS IS A LOCAL STRING'
+        print("Hello " +name)
+
+    hello()
+
+greet()
+
+# Program 3a
+print("****** Example of a Enclosing Functional Local Variable ******")
+# This is a Global Variable
+x = 50
+def func(x):
+    print(f'The value of x in the functional : {x}')
+
+    #LOCAL REASSIGNMENT !
+    x = 200
+    print(f'The value of x in the functional (after changing locally): {x}')
+
+print(f'The value of x before variable reassignment : {x}')
+func(x)
+print(f'The value of x outside the function is : {x}') #x will be 50 and not 200
+
+# Program 3b
+print("****** Example of a Enclosing Functional Local Variable ******")
+# This is a Global Variable
+x = 50
+def func():
+    global x
+    print(f'The value of x in the functional (as global variable): {x}')
+
+    #LOCAL REASSIGNMENT ON A GLOBAL VARIABLE!
+    x = 'NEW VALUE'
+    print(f'The value of x in the functional (after changing locally): {x}')
+
+print(f'The value of x before variable reassignment : {x}')
+func()
+print(f'The value of x outside the function is : {x}')
+
+=============================================================================================================================================================================================
+L57-58_MethodsAndFunctionsHW.py
+
+'''
+Methods and Functions Homework Problems
+'''
+import string
+
+#Program 1 - Write a function to calculate the volume of a sphere given its radius.
+def fun_volume(rad):
+    return ((rad ** 3)*(3.14)*(4/3))
+
+print("****** Write a function to calculate the volume of a sphere given its radius ******")
+print(fun_volume(2))
+
+
+#Program 2a - Write a function that checks whether a number is in a
+# given range (inclusive of highs and lows).
+def fun_findnum(num, low, high):
+    if num >= low and num <= high:
+        return f"{num} is in the given range - {low} and {high}."
+    else:
+        return f"{num} is not in the given range - {low} and {high}."
+
+print("****** Write a function that checks whether a number is in a given range ******")
+print(fun_findnum(2, 1, 5))
+print(fun_findnum(7, 1, 5))
+
+#Program 2b - Write a function that checks whether a number is in a
+# given range (inclusive of highs and lows).
+def fun_findnum(num, low, high):
+    if num in range(low, high+1):
+        return f"{num} is in the given range - {low} and {high}."
+    else:
+        return f"{num} is not in the given range - {low} and {high}."
+
+print("****** Write a function that checks whether a number is in a given range ******")
+print(fun_findnum(2, 1, 5))
+print(fun_findnum(7, 1, 5))
+
+
+#Program 3a - Write a function that accepts a string and calculates the number of upper cases
+# letters and lower cases letters.
+def fun_upperlower(mystr):
+    i, upp, low = 0, 0, 0
+    for i in range(len(mystr)):
+        if mystr[i].isupper():
+            upp += 1
+        elif mystr[i].islower():
+            low += 1
+        else:
+            pass
+
+    print(f"In the given string - {mystr}.")
+    print(f"The number of upper case characters is {upp}.")
+    print(f"The number of lower case characters is {low}.")
+
+print("****** Write a function that calculates the number of upper and lower case letters - 3a ******")
+fun_upperlower('Nahush VivasVat')
+fun_upperlower('Hello Mr. Kumar, How are you this Wednesday?')
+
+# Program 3b - Write a function that accepts a string and calculates the number of upper cases
+# letters and lower cases letters.
+def fun_upperlower(mystr):
+    char, upp, low = '', 0, 0
+    for char in mystr:
+        if char.isupper():
+            upp += 1
+        elif char.islower():
+            low += 1
+        else:
+            pass
+
+    print(f"In the given string - {mystr}.")
+    print(f"The number of upper case characters is {upp}.")
+    print(f"The number of lower case characters is {low}.")
+
+print("****** Write a function that calculates the number of upper and lower case letters - 3b ******")
+fun_upperlower('Nahush VivasVat')
+fun_upperlower('Hello Mr. Kumar, How are you this Wednesday?')
+
+# Program 3b - Write a function that accepts a string and calculates the number of upper cases
+# letters and lower cases letters.
+def fun_upperlower(mystr):
+    d = {'upp': 0, 'low': 0}
+    char = ''
+    for char in mystr:
+        if char.isupper():
+            d['upp'] += 1
+        elif char.islower():
+            d['low'] += 1
+        else:
+            pass
+
+    print(f"In the given string - {mystr}.")
+    print(f"The number of upper case characters is {d['upp']}.")
+    print(f"The number of lower case characters is {d['low']}.")
+
+print("****** Write a function that calculates the number of upper and lower case letters - 3c ******")
+fun_upperlower('Nahush VivasVat')
+fun_upperlower('Hello Mr. Kumar, How are you this Wednesday?')
+
+#Program 4a - Write a function that takes a list and returns a new list with unique elements of
+# the first list.
+def fun_uniquelist(mylist):
+    newset = set(mylist)
+    newlist = list(newset)
+    return newlist
+    # return list(set(mylist))
+
+print("****** Write a function that returns a new list with unique elements - 4a ******")
+newlist = fun_uniquelist([1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 1, 3, 4, 4, 5, 4, 5, 4])
+print(newlist)
+
+#Program 4b - Write a function that takes a list and returns a new list with unique elements of
+# the first list.
+def fun_uniquelist(mylist):
+    newlist = []
+    for num in mylist:
+        if num not in newlist:
+            newlist.append(num)
+    return newlist
+
+print("****** Write a function that returns a new list with unique elements - 4b ******")
+newlist = fun_uniquelist([1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 1, 3, 4, 4, 5, 4, 5, 4])
+print(newlist)
+
+#Program 5 - Write a function to multiply all the numbers in the list.
+def fun_multiplylist(mylist):
+    mul, i = 1, 0
+    for i in range(0, len(mylist)):
+        mul = mul * mylist[i]
+    return mul
+
+print("****** Write a function to multiply all the numbers in the list ******")
+num = fun_multiplylist([1, 2, 3, -4])
+print(f"The multiplication of the numbers in the list is {num}")
+
+#Program 6 - Write a function to check whether a word or phrase is palindrome or not.
+def fun_ispalindrome(str):
+    str = str.replace(' ','')
+    newstr = str[::-1]
+    if str == newstr:
+        return "The word or phrase that is sent is a palindrome"
+    else:
+        return "The word or phrase that is sent is not a palindrome"
+
+print("****** Write a function to check whether a word or phrase is palindrome or not ******")
+print(fun_ispalindrome('Hell olleH'))
+print(fun_ispalindrome('nurses run'))
+
+#Program 7a - Write a function to check whether a string is Pangram or not.
+#Pangram - Pangrams are words or sentences containing every letter of the alphabets at least once.
+def fun_ispangram(inp_str):
+    inp_str = inp_str.lower()
+    inp_str_set = set(inp_str.replace(" ",""))
+
+    # alpha_str = 'abcdefghijklmnopqrstuvwxyz'
+    alpha_str = string.ascii_lowercase #alpha = 'abcdefghijklmnopqrstuvwxyz'
+    alpha_str_set = set(alpha_str)
+
+    result = alpha_str_set.issubset(inp_str_set)  # Checks if all the items in the set X are present in Y => if Yes, returns True.
+    if result is True:
+        return "This is a Pangram Word or Sentence"
+    else:
+        return "This is a not a Pangram Word or Sentence"
+
+print("****** Write a function to check whether a word or phrase is palindrome or not - 7a ******")
+print(fun_ispangram("The quick brown fox jumps over the lazy dog."))
+
+#Program 7b - Write a function to check whether a string is Pangram or not.
+#Pangram - Pangrams are words or sentences containing every letter of the alphabets at least once.
+def fun_ispangram(inp_str):
+    inp_str = inp_str.lower()
+    inp_str_set = set(inp_str.replace(" ",""))
+
+    # alpha_str = 'abcdefghijklmnopqrstuvwxyz'
+    alpha_str = string.ascii_lowercase #alpha = 'abcdefghijklmnopqrstuvwxyz'
+    alpha_str_set = set(alpha_str)
+
+    if alpha_str_set == inp_str_set:
+        return "This is a Pangram Word or Sentence"
+    else:
+        return "This is a not a Pangram Word or Sentence"
+
+print("****** Write a function to check whether a word or phrase is palindrome or not - 7b ******")
+print(fun_ispangram("The quick brown fox jumps over the lazy dog."))
+
+=============================================================================================================================================================================================
+L80_ErrorsAndExceptions.py
+
+"""
+import time
+i = 2
+while i > 1:
+    print(i)
+    time.sleep(100)
+
+"""
+
+"""
+import tkinter as tk
+from tkinter import messagebox
+import time
+
+i = 2
+
+while i > 1:
+
+    # Function to close the window
+    def close_window(window):
+        window.destroy()
+
+    # Create the main window
+    root = tk.Tk()
+    root.title("Close Button Window")
+
+    # Set the window size
+    root.geometry("300x150")
+
+    # Create a close button
+    close_button = tk.Button(root, text="Close", command=lambda: close_window(root))
+    close_button.pack(pady=20)
+
+    # Function to automatically close the window after 2 minutes
+    def auto_close():
+        time.sleep(120)  # Wait for 2 minutes (120 seconds)
+        close_window(root)
+
+    # Run the auto close function in the background
+    root.after(100, auto_close)
+
+    # Start the Tkinter event loop
+    root.mainloop()
+
+    print(i)
+    
+"""
+import webbrowser
+import time
+import os
+import signal
+
+i = 2
+
+while i > 1:
+    # Open the website
+    url = "https://oakstreethealthprod.service-now.com/"
+    webbrowser.open(url)
+
+    # Wait for 2 minutes (120 seconds)
+    time.sleep(120)
+
+    # Closing the Chrome browser (Windows-specific)
+    # This will kill all Chrome processes. Be careful when using this as it closes all Chrome windows.
+    os.system("taskkill /f /im chrome.exe")
+
+    i = i + 1
+    print(i)
+	
+=============================================================================================================================================================================================
+L81_ErrorsAndExceptions.py
+
+'''
+Example Problems
+'''
+
+#Example - 1
+print("### Program to demonstrate TRY//EXCEPT - Example 1 ###")
+try:
+    for i in ['a', 'b', 'c']:
+        print(i ** 2)
+except:
+    print('Enter an Integer')
+
+#Example - 2
+print("### Program to demonstrate TRY//EXCEPT//FINALLY - Example 2 ###")
+x = 5
+y = 0
+try:
+    z = x / y
+except:
+    print('There is an error in the code')
+finally:
+    print("All done")
+
+#Example - 3
+
+def ask():
+    while True:
+        try:
+            x = int(input("Enter an Integer: "))
+        except:
+            print('This is not an Integer. Try Again !')
+            continue
+        else:
+            print(f"The square of the number is: {x ** 2}")
+            break
+        finally:
+            print("All done")
+
+print("### Program to demonstrate TRY//EXCEPT//FINALLY - Example 3 ###")
+ask()
+
+=============================================================================================================================================================================================
+L84_pylint.py
+
+a = 1
+b = 2
+print(a)
+print(B) #B should be small casing
+
+# In the command line editor, run the below command.
+# pylint L84_pylint.py
+
+=============================================================================================================================================================================================
+L85_Capitalize.py
+
+'''
+#Capitalize - Capitalize just the first word of the first letter.
+#Title - Capitalize every single word instead of the first letter of the word.
+'''
+
+def cap_text(text):
+    # return text.capitalize()
+    return text.title()
+
+=============================================================================================================================================================================================
+L85_UnitTest.py
+
+import unittest
+import L85_Capitalize as checkcap
+
+class TestCap(unittest.TestCase):
+
+    def test_one_word(self):
+        text = 'python'
+        result = checkcap.cap_text(text)
+        self.assertEqual(result, 'Python')
+
+    def test_multiple_word(self):
+        text = 'monty python'
+        result = checkcap.cap_text(text)
+        self.assertEqual(result, 'Monty Python')
+
+if __name__ == "__main__":
+    unittest.main()
+
+=============================================================================================================================================================================================
+L104_Collections.py
+
+from collections import Counter
+#Counter is a dictionary sub-class
+
+myList = [1, 1, 1, 1, 1, 1, 2, 3, 1, 3, 1, 2, 2, 3, 2, 3, 2, 3, 3, 3, 2, 2, 2]
+print(Counter(myList))
+
+myList = ['a', 'a', 'b', 'b', 'a', 10, 'a', 10, 10, 'b', 10, 10, 10]
+print(Counter(myList))
+
+print(Counter('aaaabbbasbaababsababbabsababsbabsabsabsbasbabs'))
+
+sentence = "How many times each word shown up in this sentence with a word"
+print(Counter(sentence.split()))
+print(Counter(sentence.lower().split()))
+
+letters = 'aaaabbbdasbaababddababbabsababsbabsabsddabsbasbabs'
+c = Counter(letters)
+print(c)
+print(c.most_common()) #operations of a counter
+print(c.most_common(2))
+print(list(c))  #passing a counter to a list, to get the unique values.
+
+=============================================================================================================================================================================================
+L104_DefaultDictionary.py
+
+from collections import defaultdict
+
+#The below is an example of normal dictionary.
+d = {'a': 10}
+print(d)
+print(d['a'])
+#print(d['WRONG']) #it throws a KeyError.
+
+#The below is an example of default dictionary.
+d = defaultdict(lambda: 0)
+d['correct'] = 100
+d['WRONG KEY']
+d['WRONG KEY']
+d['incorrect'] = 50
+d['ANOTHER WRONG KEY']
+print(d.items())
+
+=============================================================================================================================================================================================
+L104_NamedTuple.py
+    
+"""
+import webbrowser
+import time
+import os
+import signal
+
+i = 2
+
+while i > 1:
+    # Open the website
+    url = "https://oakstreethealthprod.service-now.com/"
+    webbrowser.open(url)
+
+    # Wait for 2 minutes (120 seconds)
+    time.sleep(120)
+
+    # Closing the Chrome browser (Windows-specific)
+    # This will kill all Chrome processes. Be careful when using this as it closes all Chrome windows.
+    os.system("taskkill /f /im chrome.exe")
+
+    i = i + 1
+    print(i)
+
+=============================================================================================================================================================================================
+L105_Moving File Around.py
+
+'''
+os.unlink() - delete a file at the path provided.
+os.rmdir() - deletes a folder (folder must be empty) at the path your provided.
+shutil.rmtree(path) - removes all the files and folders contained in the path
+
+All the above methods are dangerous and cannot be reversed/recovered. Instead, we will use the
+send2trash module (that is a safer alternative) and sends the deleted files to the trash bin instead
+of permanent removal.
+
+pip install send2trash  --at the command line.
+'''
+
+import os
+import shutil
+import send2trash
+
+#Creating a file in the present working directory and writing into it.
+f = open('practise.txt', 'w+')
+f.write('This is a test string')
+f.close()
+
+shutil.move('C:\\Users\\Naveen.Nammi\\PycharmProjects\\Agasthya\\Jose\\practise.txt',
+            'C:\\Users\\Naveen.Nammi\\PycharmProjects\\Agasthya')
+
+#list all the files/folders under the mentioned path
+print(os.listdir('C:\\Users\\Naveen.Nammi\\PycharmProjects\\Agasthya'))
+
+#delete the mentioned files into trash
+send2trash.send2trash('C:\\Users\\Naveen.Nammi\\PycharmProjects\\Agasthya\\practise.txt')
+print(os.listdir('C:\\Users\\Naveen.Nammi\\PycharmProjects\\Agasthya'))
+
+#list all the folders, sub-folder and files under the mentioned path
+file_path = 'C:\\Users\\Naveen.Nammi\\PycharmProjects\\Agasthya'
+# for dir, subdir, file in os.walk(os.getcwd()):
+for dir, subdir, files in os.walk(file_path):
+#os.walk() is going to make a tree and walk each and every single file in the file_path location.
+    print(f"Currently looking at {dir}")
+    print('\n')
+    print(f"The sub-folders are - ")
+
+    for sub_dir in subdir:
+        print(f"\t Subfolder Name: {sub_dir}")
+        print('\n')
+        print(f"The files are -")
+
+        for f in files:
+            print(f"\t\t File Name: {f}")
+            print('\n')
+
+=============================================================================================================================================================================================
+L105_OS Operations.py
+
+import os
+
+print(os.getcwd())      # to get the current working directory.
+print(os.listdir())     # listing the files in any directory.
+
+print(os.listdir('C:\\Users\\Naveen.Nammi\\PycharmProjects\\Agasthya'))
+
+# creating a file and writing into it
+f = open('practise.txt', 'w+')
+f.write('This is a test string')
+f.close()
+
+=============================================================================================================================================================================================
+L106_Date&Time.py
+
+import datetime
+mytime1 = datetime.time(2, 20)
+mytime2 = datetime.time(13, 54, 23, 28)
+
+print(mytime1.hour)
+print(mytime1.minute)
+print(mytime1.second)
+print(mytime1.microsecond)
+print(f"The time is {mytime1}")
+print(type(mytime1))
+
+print(mytime2.hour)
+print(mytime2.minute)
+print(mytime2.second)
+print(mytime2.microsecond)
+print(f"The time is {mytime2}")
+
+today = datetime.date.today()
+print(today)
+print(today.year)
+print(today.month)
+print(today.day)
+print(today.ctime())
+
+dob = datetime.date(1999, 6, 2)
+print(dob)
+
+=============================================================================================================================================================================================
+L106_DateTime.py
+
+from datetime import datetime
+
+mydatetime = datetime(2019, 10, 30, 10, 15, 16)
+print(mydatetime)
+print(mydatetime.year)
+print(mydatetime.second)
+
+newdatetime = mydatetime.replace(year=2023, second=20)
+print(newdatetime)
+print(newdatetime.year)
+print(newdatetime.second)
+
+#Arithmetics on Dates
+from datetime import date
+print("***** Arithmetics on Dates *****")
+date1 = date(2025, 11, 3)
+date2 = date(2020, 10, 20)
+print(date1 - date2)
+result = date1 - date2
+print(type(result))
+print(result)
+print(result.days)
+
+print("***** Arithmetics on Dates *****")
+datetime1 = datetime(2025, 11, 3, 22, 10)
+datetime2 = datetime(2020, 10, 20, 15, 56)
+print(datetime1 - datetime2)
+result = datetime1 - datetime2
+print(type(result))
+print(result)
+print(result.days)
+print(result.seconds)
+
+=============================================================================================================================================================================================
+L107_Math Module.py
+
+import math
+
+# print(help(math))
+value = 4.35
+
+print(f"The floor of a decimal number is: {math.floor(value)}")
+print(f"The ceil of a decimal number is: {math.ceil(value)}")
+print(f"The value of round is: {round(value)}")
+print(f"The value of round is: {round(4.5)}") #for rounding off at x.5, it rounds-off to the nearest even number.
+print(f"The value of round is: {round(5.5)}") #for rounding off at x.5, it rounds-off to the nearest even number.
+
+print(f"The value of PI is: {math.pi}")
+print(f"The value of log  is: {math.e}")
+print(f"The value of Infinity is: {math.inf}")
+print(f"The value of Non A Number is: {math.nan}")
+#Numpy is library specifically designed for Numerical Processing. It is extremely efficient that Python Math module.
+
+print(f"The value of 'log e' is: {math.log(math.e)}")
+print(f"The value of 'log 100 to the base 10' is: {math.log(100, 10)}")
+#It is basically showing that 10**2 gives 100.
+
+print(f"The value of 'Sin 10' is: {math.sin(10)}")
+print(f"The value of 'PI / 2 in degrees' is: {math.degrees(math.pi/2)}")
+print(f"The value of '180 degrees in radians' is: {math.radians(180)}")
+
+=============================================================================================================================================================================================
+L107_Random.py
+
+'''
+Computers use something called as Pseudo Random Number generators to come up with Random Numbers. However, this is beyond the scope of study here.
+'''
+
+import random
+
+print(random.randint(1, 100)) #check a random integer in range a & b, and it includes both endpoints.
+
+random.seed(101)
+#if two programmers set the same seed number then the program will return the same random number.
+#running the above program again-and-again will return the same random number.
+print(random.randint(0, 100)) #74
+print(random.randint(0, 100)) #24
+print(random.randint(0, 100)) #69
+print(random.randint(0, 100)) #45
+print(random.randint(0, 100)) #59
+
+myList = list(range(0, 20))
+print(f"The list is: {myList}")
+print(f"A random value chosen from the list is: {random.choice(myList)}")
+
+#sampling a list with replacement/with repetition.
+print(f"The random sample from the list is: {random.choices(population=myList,k=10)}")
+#it randomly picks numbers from the list (does 10 times) and put that into a list. Here, we can see that the numbers are being repeated.
+
+#sampling a list without replacement/without repetition.
+print(f"The random sample from the list without replacement is: {random.sample(population=myList,k=10)}")
+
+newList = list(range(0, 25))
+print(f"The list is: {newList}")
+random.shuffle(newList)
+print(f"The list after inplace suffling is: {newList}") #inplace suffling and impacts the original list.
+
+print(f"Uniform distribution random value is: {random.uniform(0, 100)}") #it shows a floating point value.
+print(f"Guassian or Normal Distribution of random value is: {random.gauss(mu=0, sigma=1)}") #it takes mean and Standard Deviation as parameters.
+
+=============================================================================================================================================================================================
+L108_PythonDebugger.py
+
+'''
+Python has a inbuilt debugger tool that allows you to interactively explore variables within
+mid-operation of the python code.
+'''
+import pdb #Python Debugger
+
+x = [1, 2, 3]
+y = 2
+z = 3
+
+result_one = y + z
+pdb.set_trace()
+result_two = x + y
+
+=============================================================================================================================================================================================
+L109_Regular Expression.py
+
+import re
+
+text = "The agent's phone number is 408-555-1234, Call soon!"
+str = "my phone once, my phone twice, my phone trice"
+
+#TEST 1
+print("\n ##### Searching a WORD in the SENTENCE - Approach 1: ##### ")
+print('phone' in text)
+
+#TEST 2
+print("\n ##### Searching a WORD in the SENTENCE - Approach 2: ##### ")
+patter = 'phone'
+match = re.search(patter, text) #Only returns the first occurrence of the object
+print(re.search(patter, text)) #Returns the matched object location (12, 17).
+print("Match Span", match.span())
+print("Match Start", match.start())
+print("Match End", match.end())
+
+#TEST 3
+print("\n ##### Searching a WORD in the SENTENCE: ##### ")
+patter = "NOT IN TEXT"
+re.search(patter, text)
+print(re.search(patter, text)) #Returns 'None' as there is no match available.
+
+#TEST 4
+print("\n ##### Searching all the occurrences of the WORD is a given SENTENCE: ##### ")
+patter = 'phone'
+matches = re.findall(patter, str) #Returns all the occurrence of the object in a List
+# print(re.findall(patter, str))
+print(matches)
+print("Occurrences: ", len(matches))
+
+print("\nIterating using the re.finditer :-")
+for match in re.finditer(patter, str): #can be used as an iterator
+    print(match)
+    print(match.span())
+    print(match.group()) #returns the actual text
+
+print("\nIterating using the re.findall :-")
+for match in re.findall(patter, str): #can be used as an iterator
+    print(match)
+
+=============================================================================================================================================================================================
+L110_Regular Expression.py
+
+import re
+
+text = "The agent's phone number is 408-555-1234, Call soon!"
+
+phone = re.search('408-555-1234', text)
+print(phone)
+
+phone = re.search(r'\d\d\d-\d\d\d-\d\d\d\d', text)
+print(phone)
+print(phone.group())
+
+#using a quantifier to indicate the repetition of the same character
+print("\nUsing a quantifier to indicate the repetition of the same character.")
+phone = re.search(r'\d{3}-\d{3}-\d{4}', text)
+print(phone)
+print(phone.group())
+
+phone_patter = re.compile(r'(\d{3})-(\d{3})-(\d{4})')
+results = re.search(phone_patter, text)
+results.group()
+print("Show all the Groups: ", results.group())
+print("Show the 1st Sub-Group: ", results.group(1))
+print("Show the 2nd Sub-Group: ", results.group(2))
+print("Show the 3rd Sub-Group: ", results.group(3))
+
+=============================================================================================================================================================================================
+L111_Regular Expression.py
+
+import re
+
+print("##### Check if 'cat' is there in the string #####")
+print(re.search(r'cat','The cat is here')) #check if cat is there in the string.
+
+print("##### Check if 'dog' is there in the string #####")
+print(re.search(r'dog','The cat is here'))
+
+print("##### Check if 'cat or dog' is there in the string #####")
+print(re.search(r'cat|dog','The cat is here'))
+
+print("##### Check if 'at' is there in the string #####")
+print(re.findall(r'at','The cat in the hat sat there.'))
+
+print("##### Check if '%at' is there in the string, and print all the respective words - wild card search #####")
+print(re.findall(r'.at','The cat in the hat sat there.'))
+
+print("##### Check if '%%%at' is there in the string, and print all the respective words - wild card search #####")
+print(re.findall(r'...at','The cat in the hat went splat.'))
+
+print("##### Check if the pattern occurs in ths string #####")
+print(re.findall(r'^\d', '5 is a Number')) #start with - ^
+print(re.findall(r'^\d', 'The 5 is a Number'))
+print(re.findall(r'\d$', 'Number is 5')) #ends with - $
+
+print("##### Finding pattern based on the Regular Expression #####")
+phrase = 'there are 3 numbers 34 inside 5 this sentence'
+pattern1 = r'[^\d]'
+print(re.findall(pattern1, phrase))
+
+pattern2 = r'[^\d]+'
+print(re.findall(pattern2, phrase))
+
+print("##### Finding pattern using Regular Expression - Grouping for Exclusion #####")
+text_phrase = 'This is a string! But it has punctuation. How can we remove it?'
+print(re.findall(r'[^!.?]+', text_phrase))
+print(re.findall(r'[^!.? ]+', text_phrase)) #removing spaces to get the list of words.
+
+clean = re.findall(r'[^!.?]+', text_phrase)
+print(' '.join(clean))
+
+print("##### Finding pattern using Regular Expression - Grouping for Inclusion #####")
+text_phrase = 'Only find the hypen-words in this sentence. But you do not know how long-ish they are'
+pattern = r'[\w]+'
+print(re.findall(pattern, text_phrase))
+pattern = r'[\w]+-[\w]+'
+print(re.findall(pattern, text_phrase))
+pattern = r'\w+-\w+'
+print(re.findall(pattern, text_phrase))
+
+print("##### Combining the 'or' statement with other pieces of text #####")
+text_one = 'Hello, would you like some catfish?'
+text_two = "Hello, would you like to take a catnap?"
+text_three = "Hello, have you seen this caterpillar?"
+print(re.search(r'cat(fish|nap|claw)', text_one))
+print(re.search(r'cat(fish|nap|claw)', text_two))
+print(re.search(r'cat(fish|nap|claw)', text_three)) #returns None
+print(re.search(r'cat(fish|nap|erpillar)', text_three))
+
+=============================================================================================================================================================================================
+L112_Timing the Python Code.py
+
+'''
+There are 3 ways of doing this -
+- Simply tracking time elapsed
+- Using the 'timeit' module
+- Special %%timeit "magic" for Jupyter Notebooks
+'''
+
+def func_one(n):
+    return [str(num) for num in range(n)]
+
+def func_two(n):
+    return list(map(str, range(n)))
+
+print(func_one(10))
+print(func_two(10))
+
+#APPROACH#1
+import time
+
+print("APPROACH#1")
+#GRAB THE CURRENT TIME BEFORE RUNNING THE CODE
+start_time = time.time()
+#RUN THE CODE
+result = func_one(10000)
+#GRAB THE CURRENT TIME AFTER RUNNING THE CODE
+end_time = time.time()
+#ELAPSE TIME
+elapsed_time = end_time - start_time
+print("The difference using 'time' for func_one is : ", elapsed_time)
+
+#GRAB THE CURRENT TIME BEFORE RUNNING THE CODE
+start_time = time.time()
+#RUN THE CODE
+result = func_two(10000)
+#GRAB THE CURRENT TIME AFTER RUNNING THE CODE
+end_time = time.time()
+#ELAPSE TIME
+elapsed_time = end_time - start_time
+print("The difference using 'time' for func_two is : ", elapsed_time)
+
+
+#APPROACH#2
+import timeit
+
+print("APPROACH#2")
+stmt_one = '''
+func_one(100)
+'''
+setup_one = '''
+def func_one(n):
+    return [str(num) for num in range(n)]
+'''
+
+time_fun_one = timeit.timeit(stmt_one, setup_one, number=1000000)
+print("The difference using 'timeit' for func_one is : ", time_fun_one)
+
+stmt_two = '''
+func_two(100)
+'''
+setup_two = '''
+def func_two(n):
+    return [str(num) for num in range(n)]
+'''
+time_fun_two = timeit.timeit(stmt_two, setup_two, number=1000000)
+print("The difference using 'timeit' for func_two is : ", time_fun_two)
+
+=============================================================================================================================================================================================
+L113_Zipping and Unzipping Files.py
+
+print("Creating files and writing content into the same...")
+f = open('file_one.txt', 'w+')
+f.write('FIRST FILE')
+f.close()
+
+f = open('file_two.txt', 'w+')
+f.write('SECOND FILE')
+f.close()
+
+#APPROACH - 1
+import zipfile
+
+print('##### FILE COMPRESSION - 1 #####')
+
+print("Compressing the file...")
+#COMPRESSEDING TWO FILES
+comp_file = zipfile.ZipFile('file_compr.zip', 'w')
+comp_file.write('file_one.txt', compress_type=zipfile.ZIP_DEFLATED)
+comp_file.write('file_two.txt', compress_type=zipfile.ZIP_DEFLATED)
+comp_file.close()
+
+print("Extracting the file...")
+#EXTRACTING THE FILE INTO A FOLDER CALLED
+zip_object = zipfile.ZipFile('file_compr.zip', 'r')
+zip_object.extractall('extracted_content') #folder name is extracted_content
+
+
+#APPROACH - 2
+import shutil
+
+print('##### FILE COMPRESSION - 2 (shutil) #####')
+
+print("Zipping the file...")
+#ZIPPING THE FILE
+dir_to_zip = "C:/Users/Naveen.Nammi/PycharmProjects/Agasthya/Jose/extracted_content"
+file_name = 'shutil_example'
+shutil.make_archive(file_name, 'zip', dir_to_zip)
+
+print("Unzipping the file...")
+#UNZIPPING THE FILE
+shutil.unpack_archive('shutil_example.zip', 'upzip_folder', 'zip')
+
+=============================================================================================================================================================================================
+L116_Webscraping.py
+
+'''
+Web Scraping is a general term for techniques involving automating the gathering of data
+from website - such as downloading images or information
+HTML (Hyper Text Markup Language) is a special code that the browser is able to understand in
+order to display something nice for the user to read.
+HTML - Used to create the basic structure and content of a Webpage.
+CSS - Used for the design and style of a Webpage, where elements are placed and how it looks.
+JavaScript - Used to define the interactive elements of a Webpage.
+CSS stands for Cascading Style Sheets.
+To web scrape using Python, we can use the BeautifulSoup and requests libraries.
+pip install requests
+pip install lxml
+pip install bs4
+'''
+
+import requests
+import bs4
+
+result = requests.get("https://example.com/")
+print(result.text)
+
+=============================================================================================================================================================================================
+L35_ForLoop.py
+
+'''
+For Loops
+'''
+
+# Test 1
+print("### Program to show 'for' loop ###")
+mylist = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+for jelly in mylist:
+    print(jelly)
+
+# Test 2
+print("### Program to show 'for' loop ###")
+mylist = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+for jelly in mylist:
+    print("Hello")
+
+# Test 3 - Checking the Even Number
+print("### Program to print the Even/Odd number using 'for' loop ###")
+mylist = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+for num in mylist:
+    #Check for Even
+    if num % 2 == 0:
+        print(num)
+    else:
+        print(f'Odd Number: {num}')
+
+#Test 4 - Keeping a running tally of multiple loops
+#This can also be achieved using enumerate function.
+print("### Program to show the running tally of the numbers in the list. ###")
+mylist = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+list_sum = 0
+for num in mylist:
+    list_sum += num
+    print(f'The running tally of the numbers in the list is : {list_sum}, for iteration # {num}')
+
+print(f'The sum of the numbers in the list is : {list_sum}')
+
+#Test 5 - Iterating over a String
+# Strings are sequence, and we can iterate through them. We can be accessing each character in the string.
+# Approach # 1
+print("### Program to show iteration over a String. ###")
+print("Printing letters in a String using 'for' loop.")
+mystring = 'Hello World'
+for letter in mystring:
+    print(letter)
+
+# Approach # 2
+print("### Program to print the letters in a String, using 'for' loop. ###")
+print("Printing letters in a String using 'for' loop.")
+for letter in 'Hello World':
+    print(letter)
+
+#Test 6 - Variable in 'for' loop
+print("### Program to show '_' as a iterator in the 'for' loop. ###")
+for _ in 'Hello World':
+    print('Cool !')
+
+#Test 7 - Iterating over a tuple.
+tup = (1, 2, 3)
+print ("### Program for iterating over a tuple. ###")
+for items in tup:
+    print(tup)
+    print(items)
+
+#Test 8 - Tuple Unpacking - Approach 1
+mylist = [(1, 2), (3, 4), (5, 6), (7, 8)]
+print ("### Program for Tuple Unpacking. ###")
+print (f'The length of the list is - {len(mylist)}')
+for item in mylist:
+    print(item)
+
+#Test 8 - Tuple Unpacking - Approach 2
+mylist = [(1, 2), (3, 4), (5, 6), (7, 8)]
+print ("### Program for Tuple Unpacking. ###")
+print (f'The length of the list is - {len(mylist)}')
+#for a,b in mylist:
+for (a,b) in mylist:
+    print(a)
+    #print(b)
+
+#Test 9 - Tuple Unpacking - Approach 1
+mylist = [(1, 2, 3), (5, 6, 7), (8, 9, 10)]
+print ("### Program for Tuple Unpacking. ###")
+for item in mylist:
+    print(item)
+
+#Test 9 - Tuple Unpacking - Approach 2
+mylist = [(1, 2, 3), (5, 6, 7), (8, 9, 10)]
+print ("### Program for Tuple Unpacking. ###")
+print (f'The length of the list is - {len(mylist)}')
+#for a,b,c in mylist:
+for (a,b,c) in mylist:
+    print(b)
+
+#Test 10 - Iterating through a Dictionary - #1
+d = {'k1':1, 'k2':2, 'k3':3}
+print ("### Program for iterating over a Dictionary - 1. ###")
+#Print the Dictionary Values.
+for item in d:
+    print(item)
+
+#Test 10 - Iterating through a Dictionary - #2
+d = {'k1':1, 'k2':2, 'k3':3}
+print ("### Program for iterating over a Dictionary - 2. ###")
+#Print the Dictionary Pairs.
+for item in d.items():
+    print(item)
+
+#Test 10 - Iterating through a Dictionary - #3a
+d = {'k1':1, 'k2':2, 'k3':3}
+print ("### Program for iterating over a Dictionary - 3a. ###")
+#Print the Dictionary Values or Keys.
+for key, value in d.items():
+    print(value)
+
+#Test 10 - Iterating through a Dictionary - #3b
+d = {'k1':1, 'k2':2, 'k3':3}
+print ("### Program for iterating over a Dictionary - 3b. ###")
+#Print the Dictionary Values or Keys.
+for val in d.values():
+    print(val)
+
+#Note: Dictionaries are Unordered.
+
+=============================================================================================================================================================================================
+L36_WhileLoop.py
+
+'''
+While Loops - While loops will continue to execute a block of code while some condition remains True.
+
+Syntax
+-----------------------------
+while <boolen_condition>:
+    #do something
+else:
+    #do something different
+
+break: breaks out of the current closest enclosing loop.
+continue: goes to the top of the closest enclosing loop.
+pass: does nothing at all.
+
+'''
+
+#Test 1 - While Loop
+x = 0
+print("### Program for While Loop - 1 ###")
+while x < 5:
+    print(f'The current value of x is {x}.')
+    #x = x + 1
+    x += 1
+
+#Test 2 - While Loop with Else
+x = 0
+print("### Program for While Loop with Else - 2 ###")
+while x < 5:
+    print(f'The current value of x is {x}.')
+    x += 1
+else:
+    print("x IS NOT LESS THAN 5.")
+
+'''
+#Test 3a - pass keyword
+x = [1, 2, 3]
+print("### Program to show 'pass' keyword - 3a ###")
+for item in x:
+    #comments - throws a syntax error because
+    #for loop should be followed by a block and not comments.
+print ("End of the Script")
+'''
+
+# Test 3b - pass keyword
+x = [1, 2, 3]
+print("### Program to show 'pass' keyword - 3b ###")
+for item in x:
+    #commnets
+    pass
+print ("End of the Script")
+
+# Test 4 - continue keyword
+mystring = 'Sammy'
+print("### Program to show 'continue' keyword - 4 ###")
+for letter in mystring:
+    # if the letter is 'a' then skip that letter and print the rest.
+    if letter == 'a':
+        continue
+    print (letter)
+
+# Test 5a - break keyword
+mystring = 'Sammy'
+print("### Program to show 'break' keyword - 5a ###")
+for letter in mystring:
+    # when the letter is 'a' then break and stop the loop.
+    if letter == 'a':
+        break
+    print (letter)
+
+# Test 5b - break keyword
+x = 0
+print("### Program to show 'break' keyword - 5b ###")
+while x < 5:
+    # when x is equal to 2, then break and stop the loop.
+    if x == 2:
+        break
+    print (x)
+    x += 1
+
+=============================================================================================================================================================================================
+L37_BuiltIn_Functtions.py
+
+'''
+Built-in Functions & Operator keywords in Python.
+
+Generator is a special type of function that would generate information instead of saving it
+into the memory.
+- Range
+- Enumerate
+- Zip (opposite of Enumerate function)
+- in
+- min
+- max
+- random
+- input
+'''
+
+#Test 1a - Range Function
+mylist = [1, 2, 3]
+print("### Program to demonstrate Range Function - 1a ###")
+for num in range(3, 10):
+    print(num)
+
+#Test 1b - Range Function, with Step Size
+print("### Program to demonstrate Range Function, with Step Size - 1b ###")
+for num in range(0, 10, 2):
+    print(num)
+
+#Test 1c - Range Function, with Step Size
+print("### Program to demonstrate Range Function as a list - 1c ###")
+print(list(range(0, 11, 2)))
+
+#Test 2a - Enumerate Function
+print("### Program to demonstrate index/letter of a word - 2a ###")
+index_count = 0
+for letter in 'abcde':
+    #print(f'At index {index_count} the letter is {letter}')
+    print('At index {} the letter is {}'.format(index_count, letter))
+    index_count += 1
+
+#Test 2b - Enumerate Function
+print("### Program to demonstrate index/letter of a word - 2b ###")
+index_count = 0
+word = 'abcde'
+for letter in word:
+    #print(word[index_count])
+    #print('At index {} the letter is {}'.format(index_count, letter))
+    print('At index {} the letter is {}'.format(index_count, word[index_count]))
+    index_count += 1
+
+#Test 2c - Enumerate Function
+print("### Program to demonstrate index/letter of a word using Enumerate Function (as tuples) - 2c ###")
+#Enumerate function does the index count automatically in the form of tuples.
+word = 'abcde'
+for letter in enumerate(word):
+    print(letter)
+
+#Test 2d - Enumerate Function
+print("### Program to demonstrate index/letter of a word using Enumerate Function (as tuples) - 2d ###")
+#Enumerate function does the index count automatically in the form of tuples.
+#Enumerate function can take in  any sort of iterable object (not just string) and
+# will return index counter and the object itself.
+word = 'abcde'
+for index, letter in enumerate(word):
+    print(f'{index} is the index for the letter {letter}')
+
+#Test 3a - Zip Function
+print("### Program to demonstrate Zip Function, two lists - 3a ###")
+#Zip function zips/pair-up together two lists.
+mylist1 = [1, 2, 3, 4, 5]
+mylist2 = ['a', 'b', 'c', 'd', 'e']
+for item in zip(mylist1, mylist2):
+    print(item)
+
+#Test 3b - Zip Function
+print("### Program to demonstrate Zip Function, more than two lists - 3b ###")
+mylist1 = [1, 2, 3, 4, 5]
+mylist2 = ['a', 'b', 'c', 'd', 'e']
+mylist3 = [100, 200, 300, 400.1, 500.5]
+for item in zip(mylist1, mylist2, mylist3):
+    print(item)
+
+#Test 3c - Zip Function
+print("### Program to demonstrate Zip Function, with uneven lists - 3c ###")
+#Zip function will only go and zip together as far as the list which is the shortest, and will
+# ignore everything that is extra.
+mylist1 = [1, 2, 3, 4, 5, 6, 7, 9, 10]
+mylist2 = ['a', 'b', 'c', 'd', 'e', 'f']
+mylist3 = [100, 200, 300, 400.1, 500.5]
+for item in zip(mylist1, mylist2, mylist3):
+    print(item)
+
+print(list(zip(mylist1, mylist2)))
+
+#Test 3d - Zip Function & Tuple Unpacking
+print("### Program to demonstrate Zip Function & Tuple unpacking - 3d ###")
+mylist1 = [1, 2, 3, 4, 5, 6, 7, 9, 10]
+mylist2 = ['a', 'b', 'c', 'd', 'e', 'f']
+mylist3 = [100, 200, 300, 400.1, 500.5]
+for a, b, c in zip(mylist1, mylist2, mylist3):
+    print(b)
+
+#Test 4a - In Keyword
+print("### Program to demonstrate 'in' keyword - 4a ###")
+#'in' keyword usage in list
+print('x' in [1, 2, 3])
+print('x' in ['x', 'y', 'z'])
+#'in' keyword usage in string
+print('a' in 'The World is a small place')
+#'in' keyword usage in dictionary
+print('mykey' in {'mykey': 345})
+
+#Test 4b - In Keyword
+print("### Program to demonstrate 'in' keyword in dictionary - 4b ###")
+d = {'mykey1': 345, 'mykey2': 456}
+if 456 in d.values():
+    print("In Values")
+if 'mykey1' in d.keys():
+    print("In Keys")
+
+#Test 5a - 'min' & 'max' function
+print("### Program to demonstrate 'min' & 'max' keyword - 5a ###")
+mylist = [40, 20, 35, 15, 100]
+print(f'The minimum of the list is {min(mylist)}')
+print(f'The minimum of the list is {max(mylist)}')
+
+#Test 6a - 'Random' Library
+print("### Program to demonstrate 'random' liberary - 6a ###")
+mylist = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+#Python comes with built-in Random Library.
+#First, we need to import from the Random library and then call the shuffle function.
+from random import shuffle
+#print(shuffle(mylist)) #this does not return any value and the type is defined as 'None'
+shuffle(mylist) #this is an inplace function - that operates inplace
+print(mylist)
+
+#Test 6b - 'Random' Library
+print("### Program to grab a random integer between a range - 6b ###")
+from random import randint
+ran = randint(0, 100)
+print(f'The random number is {ran}')
+
+#Test 7a - Taking user input.
+#input always accepts as a string.
+print("### Program to take user input - 7a ###")
+uname = input("Enter your Name: ")
+print(type(uname))
+print(f"The name of the person is {uname}.")
+
+#Test 7b - Taking user input and casting it.
+print("### Program to take user input and casting it - 7a ###")
+a = int(input("Enter a Number: "))
+print(type(a))
+print(f"The number entered is {a}.")
+
+=============================================================================================================================================================================================
+L38_List Comprehensions.py
+
+'''
+List Comprehensions in Python
+- List Comprehensions are a unique way of quickly creating a list in Python.
+If you find yourself using a for loop along with .append() to create a list, then list comprehensions
+are a good alternative.
+
+'''
+#Test 1 - Appending to a list, using for loop.
+print("### Program to appending to a list, using for loop - 1 ###")
+mystring = 'hello'
+mylist = []
+for letter in mystring:
+    mylist.append(letter)
+print(mylist)
+
+#Test 2 - Appending to a list, using list Comprehensions.
+print("### Program to appending to a list, using list comprehensions - 2 ###")
+mystring = 'hello'
+#for letter in mystring:
+#    mylist.append(letter)
+#the above two lines are replaced with the below single line - flattened out the for loop.
+mylist = [letter for letter in mystring]
+print(mylist)
+
+#Test 3 - List Comprehensions
+print("### Program to demonstrate list comprehensions - 3 ###")
+print([x for x in 'wordtwo'])
+print([x for x in range(0, 11)])
+
+#Test 4 - List Comprehensions, with operations on the variable.
+print("### Program to demonstrate list comprehensions, with operations on the variable - 4 ###")
+print("The square of numbers in a range is: ")
+print([x**2 for x in range(0, 11)])
+
+#Test 5 - List Comprehensions, with 'if' statement.
+print("### Program to demonstrate list comprehensions, with 'if' statement - 5 ###")
+print("The list of even numbers in the range is: ")
+print([x for x in range(0, 11) if x % 2 == 0])
+print("The square of even numbers in the range is: ")
+print([x**2 for x in range(0, 11) if x % 2 == 0])
+
+#Test 6 - List Comprehensions - more examples.
+print("### Program to convert celsius into fahrenheit - 6 ###")
+celsius = [1, 10, 20, 34.5]
+print("The temperature in fahrenheit is: ")
+print([((9/5)* temp + 32) for temp in celsius])
+
+#Test 7 - List Comprehensions, with 'if-else' statement.
+print("### Program to demonstrate list comprehensions, with 'if-else' statement - 7 ###")
+print("The list of even numbers in the range is: ")
+print([x if x%2 == 0 else 'ODD' for x in range(0,11)])
+
+#Test 8a - Nested loop (without List Comprehensions)
+print("### Program to demonstrate Nested Loop, without List Comprehensions - 8a ###")
+mylist = []
+for x in [2, 4, 6]:
+    for y in [10, 200, 300]:
+        mylist.append(x*y)
+print(mylist)
+
+#Test 8b - List Comprehensions, with Nested loop.
+print("### Program to demonstrate list comprehension, with Nested loop - 8b ###")
+print([x*y for x in [2, 4, 6] for y in [10, 200, 300]])
+
+=============================================================================================================================================================================================
+L40.py
+
+#Test - 1
+#Use for, .split(), and if to create a statement that will point out words that start with 's'.
+st = 'Sam Print only the words that start with s in this sentence'
+for word in st.split():
+    #print(word)
+    if word[0].lower() == 's':
+        print(word)
+
+#Test - 2
+#Use range() to print all the even numbers from 0 to 10
+print("The list of even numbers from 0 to 10: ")
+#Approach - 1
+mylist = [x for x in range(0, 11) if x % 2 == 0]
+print(mylist)
+#Approach - 2
+print(list(range(0, 11, 2)))
+#Approach - 3
+for num in range(0, 11, 2):
+    print(num)
+
+#Test - 3
+#Use a list comprehension to create a list of all numbers between 1 and 50 that are divisible by 3
+#Approach - 1
+print([x for x in range(3, 50, 3)])
+#Approach - 2
+print([x for x in range(1, 51) if x % 3 == 0])
+
+#Test - 4
+#Go through the below string and if the length of a word is even print "even" !
+st = 'Sam Print only the words that start with s in this sentence'
+for word in st.split():
+    if len(word) % 2 == 0:
+        print(word+' is Even !')
+    else:
+        print(word)
+
+#Test - 5
+#Write a program that prints the integers from 1 to 100, But for multiples of three print "Fizz"
+#instead of the number, and for the multiples of five print "Buzz". For number which are multiples
+#of both three and five print "FizzBuzz".
+mylist = list(range(1, 101))
+#print(mylist)
+for num in mylist:
+    if num % 3 == 0 and num % 5 == 0:
+        print('FizzBuzz')
+    elif num % 3 == 0:
+        print('Fizz')
+    elif num % 5 == 0:
+        print('Buzz')
+    else:
+        print(num)
+
+#Test - 6
+#Use List Comprehensions to create a list of the first letters of every word in the string below:
+st = 'Create a list of the first letters of every word in the string'
+print([x[0] for x in st.split()])
+
+=============================================================================================================================================================================================
+L41.py
+
+mylist = [1, 2, 3]
+print(mylist)
+
+mylist.append(4)
+print("Adding a value to the list at the end.")
+print(mylist)
+
+mylist.pop()
+print("Removing the last item from the list.")
+print(mylist)
+
+#Run the below help function to get the actual documentation of the object.
+help(mylist.insert)
+
+#https://docs.python.org/3 - Python Standard Library
+
+
+=============================================================================================================================================================================================
+Lesson42-43.py
+
+'''
+Functions -
+Functions allow us to create blocks of code that can be easily executed many times, without
+needing to constantly rewrite the entire block of code.
+
+The function naming follows snake casing (Example: name_of_function)
+Snake casing is all lowercases with underscore between words.
+
+Syntax:-
+def <Function_Name>():
+    """
+    Docstring explains Functions.
+    Optional: Multiline String to describe the function.
+    """
+
+Typically, the "return" keyword is used to send back the result of the function, instead of just
+printing it. "return" allows us to assign the output of the function to a new variable.
+
+'''
+
+# Test 1 - Functions
+def name_of_function():
+    print("Hello")
+
+print("### Program to demonstrate functions - 1 ###")
+name_of_function()
+
+# Test 2 - Functions with Parameters
+def name_of_function(name):
+    print("Hello " +name)
+
+print("### Program to demonstrate functions, with parameters - 2 ###")
+name_of_function("Naveen")
+
+# Test 3 - Functions with Return Variable
+def add_function(num1, num2):
+    return num1 + num2
+
+print("### Program to demonstrate functions, with return variable - 3 ###")
+result = add_function(5, 2)
+print(result)
+
+
+=============================================================================================================================================================================================
+Lesson44.py
+
+
+# Test 1 - Functions
+def say_hello():
+    print("Hello")
+    print('How')
+    print('Are')
+    print('You')
+
+print("### Program to demonstrate functions - 1 ###")
+say_hello()
+
+# Test 2 - Functions with Parameters
+def say_hello(name):
+    print(f'Hello {name}')
+
+print("### Program to demonstrate functions, with parameters - 2 ###")
+say_hello('Naveen')
+#say_hello()
+#throws a syntax error - TypeError: say_hello() missing 1 required positional argument: 'name'
+
+# Test 3 - Functions with Parameters with Default Value
+def func_hello(name="Default"):
+    print(f'Hello {name}')
+
+print("### Program to demonstrate functions, with default value - 3 ###")
+func_hello('Naveen')
+func_hello()
+
+# Test 4 - Functions with Return Variable
+def add_num(num1, num2):
+    return num1 + num2
+
+print("### Program to demonstrate functions, with return variable - 4 ###")
+print(add_num(10, 20))
+print(add_num('10', '20'))
+print(add_num(10.20, 20.152))
+print(add_num(10, 20.152))
+
+=============================================================================================================================================================================================
+Lesson45.py
+'''
+Functions with Logic
+'''
+
+# Test 1a - Write a function to check if a give number is even or odd.
+def even_odd_check(num):
+    if num % 2 == 0:
+        print(f'{num} is an Even Number.')
+    else:
+        print(f'{num} is an Odd Number.')
+
+print("### Program to check if a given number is even or odd - 1a ###")
+x = int(input("Enter a number to check if it Even or Odd: "))
+even_odd_check(x)
+
+
+# Test 1b - Write a function to return true if a give number is Even or Odd.
+def even_check(num):
+    return num % 2 == 0
+
+print("### Program to check if a given number is even or odd - 1b ###")
+print(even_check(44))
+
+# Test 2 - Write a function to return true if any number is Even inside a list.
+def check_even_list(numlist):
+    for number in numlist:
+        if number % 2 == 0:
+            return True
+        else:
+            pass
+    return False
+
+print("### Program to check if a given list has even numbers inside it - 2 ###")
+print(check_even_list([1, 3, 7, 15, 17, 19]))   #Odd - False
+print(check_even_list([1, 3, 7, 15, 17, 18]))   #Even - True
+print(check_even_list([18, 3, 7, 15, 17, 18]))  #Even - True
+print(check_even_list([18, 3, 7, 15, 17, 1]))   #Even - True
+print(check_even_list([1]))                     #Odd - False
+print(check_even_list([4]))                     #Even - True
+
+# Test 3 - Write a function to return all the even numbers in the list.
+def check_even_num(numlist):
+    even_num = [] #placeholder variable
+    for number in numlist:
+        if number % 2 == 0:
+            even_num.append(number)
+        else:
+            pass
+    return even_num
+
+print("### Program to return all the even numbers in the list - 3 ###")
+retlist = check_even_num([1, 2, 7, 14, 17, 18])
+print(retlist)
+
+retlist = check_even_num([18])
+print(retlist)
+
+retlist = check_even_num([1, 3, 5])
+print(retlist)
+
+=============================================================================================================================================================================================
+Lesson46.py
+
+'''
+Tuples unpacking with Python Functions
+'''
+
+# Test 1 - Write a program for tuple unpacking.
+print("### Program to fetch the stock prices from a tuple - 1 ###")
+
+stock_prices = [('APPL', 150), ('GOOG', 200), ('MSFT', 300)]
+print("### Tuple Unpacking ###")
+for item in stock_prices:
+    print(item)
+
+print("### Tuple Unpacking - only the ticker ###")
+for ticker, price in stock_prices:
+    print(price + (0.1 * price))
+
+# Test 2 - Write a function that will return a tuple, and unpack the results from the tuple.
+print("### Program to fetch the top performing employee based on most number of working hours - 2 ###")
+
+def employee_check(work_hours):
+    current_max = 0
+    employee_of_month = ''
+
+    for work_emp, work_hrs in work_hours:
+        if (work_hrs > current_max):
+            current_max = work_hrs
+            employee_of_month = work_emp
+        else:
+            pass
+    return(employee_of_month, current_max)
+
+star_emp, work_hours = employee_check([('Abby', 100), ('Billy',250), ('Cassie', 400)])
+print(f'Employee of the Month is {star_emp}, with {work_hours} hours of work.')
+star_employee = employee_check([('Hanuma', 100), ('Aditya',650), ('Garuda', 400)])
+print(f'Employee of the Month is {star_employee[0]}, with {star_employee[1]} hours of work.')
+=============================================================================================================================================================================================
+Lesson47.py
+
+'''
+Interactions between Functions
+
+*** Three Cup Monte - Game ***
+'''
+
+# Test 1 - Shuffling a list in random in Python.
+print("### Program to shuffle a list in random - 1 ###")
+example = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+from random import shuffle
+print(f'The list before shuffling is {example}.')
+shuffle(example)
+print(f'The list after shuffling is {example}.')
+
+# Test 2 - Write a program to create a Three Cup Monte Game.
+print("### Three Cup Monte Game - 2 ###")
+
+def shuffle_list(mylist):
+    shuffle(mylist)
+    return(mylist)
+
+def player_guess():
+    guess = ''
+    while guess not in [0, 1, 2]:
+        guess = int(input("Pick a Number 0, 1, or 2: "))
+    return guess
+
+def check_guess(mylist, guess):
+    if mylist[guess] == '0':
+        print("Correct")
+    else:
+        print("Wrong Guess")
+        print(mylist)
+
+#INITAL LIST
+from random import shuffle
+mylist = ['', '0', '']
+
+#SHUFFLE LIST
+mixedup_list = shuffle_list(mylist)
+
+#USER GUESS
+guess = player_guess()
+
+#CHECK GUESS
+check_guess(mixedup_list, guess)
+
+
+
+=============================================================================================================================================================================================
+Lesson49.py
+
+'''
+Using Arbitrary number of Arguments & Keyword Arguments in Python.
+*args (Arguments) - return back a tuple
+**kwargs (Keyword Arguments) - return back a dictionary
+
+Python support Arbitrary number of Keyword Arguments - using **kwargs.
+Keyword Arguments is a built-in dictionary of key, value pairs.
+'''
+
+# Test 1 -  simple function with return value
+print("### Program to return 5% of the Sum of a & b - 1 ###")
+def myfunc(a, b):
+    #Return 5% of the sum of a & b.
+    return sum((a,b)) * 0.05 #Observe here that both a and b are passed as tuples.
+calc = myfunc(40, 60)
+#Positional Arguments - 40 is assigned to a (because 40 is the first argument or is in the first position)
+#and 60 is assigned to b (because 60 is the second argument or is in the second position)
+print(calc)
+
+# Test 2 -  Arguments in Python
+print("### Program to return 5% of the sum based on number of parameters passed in the function - 2 ###")
+def myfunc(a, b, c = 0, d = 0, e = 100):
+    #if c, d, e values are not passed in the function call then it will take default values as mentioned
+    #i.e. c = 0, d = 0, e = 100
+    #Return 5% of the sum of a & b.
+    return sum((a, b, c, d, e)) * 0.05
+calc = myfunc(40, 60)
+#Positional Arguments - 40 is assigned to a (because 40 is the first argument or is in the first position)
+#and 60 is assigned to b (because 60 is the second argument or is in the second position)
+print(calc)
+
+# Test 3a -  Arguments in Python - passing Arbitrary Number of Values
+print("### Program to return 5% of the sum based on arbitrary number of parameters passed in the function, using *args - 3a ###")
+def myfunc(*args):
+    #treat this as a tuple of parameters that are coming in.
+    #Note: We can use any word instead of 'args'.
+    print(args)
+    return sum(args) * 0.05
+calc = myfunc(40, 60, 100, 0, 200)
+#Positional Arguments - 40 is assigned to a (because 40 is the first argument or is in the first position)
+#and 60 is assigned to b (because 60 is the second argument or is in the second position)
+print(calc)
+
+# Test 3b -  Arguments in Python - passing Arbitrary Number of Values
+print("### Program to return 5% of the sum based on arbitrary number of parameters passed into a function, using *args - 3b ###")
+def myfunc(*param):
+    add_items = 0
+    print('The value in the tuple are: ')
+    for items in param:
+        print(items)
+        add_items += items
+    return add_items * 0.05
+
+calc = myfunc(40, 60, 100, 0, 200)
+print(f'The value returned by the function is {calc}')
+
+# Test 4 -  Keywords in Python - passing Arbitrary Number of Values
+print("### Program to illustrate arbitrary number of keyword passed into a function, using **kwargs - 4 ###")
+def myfunc(**kwargs):
+    print(kwargs)
+    if 'fruit' in kwargs:
+        print('My fruit of choice is {}'.format(kwargs['fruit']))
+    else:
+        print('I did not find any fruit here.')
+
+myfunc(fruit = 'Apple')
+myfunc(fruit = 'Apple', veggie = 'lettuce')
+
+# Test 5 -  Using Keywords and Arguments in Combination
+print("### Program to illustrate arbitrary number of arguments & keyword passed into a function, using both *args & **kwargs - 5 ###")
+def myfunc(*args, **kwargs):
+    print('I would like {} {}'. format(args[0], kwargs['food']))
+
+myfunc(10, 20, 30, fruite = 'Orange', food = 'Panner', animal = 'Dog')
+
+=============================================================================================================================================================================================
+Lesson51.py
+
+'''
+Programming Practise using Functions
+'''
+
+#**********************************************************************************************************
+#LESSER OF TWO EVENS: Write a function that returns the lesser of two given numbers if both numbers are even,
+#but returns the greater if one or both numbers are odd.
+#**********************************************************************************************************
+
+#Test 1a - Approach 1
+def myfuncLess(num1, num2):
+    if num1 < num2:
+        return num1
+    else:
+        return num2
+
+def myfuncHigh(num1, num2):
+    if num1 > num2:
+        return num1
+    else:
+        return num2
+print("Write a function that returns the lesser of two given numbers if both numbers are even, but returns the greater if one or both numbers are odd.")
+print("### This is program number 1 - approach 1 ###")
+num1 = int(input("Enter a Number: "))
+num2 = int(input("Enter another Number: "))
+
+if num1 % 2 == 0 and num2 % 2 == 0:
+    ans = myfuncLess(num1, num2)
+else:
+    ans = myfuncHigh(num1, num2)
+
+print(ans)
+
+
+#Test 1b - Approach 2
+
+def myfunc(num1, num2):
+    if num1 % 2 == 0 and num2 % 2 == 0:
+        return min(num1, num2)
+    else:
+        return max(num1, num2)
+
+print("### This is program number 1 - approach 2 ###")
+num1 = int(input("Enter a Number: "))
+num2 = int(input("Enter another Number: "))
+
+print(myfunc(num1, num2))
+
+
+
+#***********************************************************************************************************
+#ANIMAL CRACKERS: Write a function that takes two-word string and returns True if both words begin with same letter.
+#**********************************************************************************************************
+
+
+#Test 2a - Approach 1
+def animal_cracker(str1, str2):
+    if str1[0] == str2[0]:
+        return True
+    else:
+        return False
+
+print("Write a function that takes two-word string and returns True if both words begin with same letter.")
+print("### This is program number 2 - approach 1 ###")
+name1 = input("Enter a Name: ")
+name2 = input("Enter another Name: ")
+
+print(animal_cracker(name1, name2))
+
+#Test 2a - Approach 2
+def animal_cracker(names):
+    wordlist = names.lower().split()
+    return wordlist[0][0] == wordlist [1][0]
+
+print("### This is program number 2 - approach 2 ###")
+names = input("Enter two Names: ")
+print(animal_cracker(names))
+
+#***********************************************************************************************************
+#MAKES TWENTY: Given two integers, return True if the sum of the integers is 20 or if one of the integer is 20.
+#If not, return False.
+#**********************************************************************************************************
+
+#Test 3a - Approach 1
+def myfunc(num1, num2):
+    if num1 == 20 or num2 == 20 or (num1+num2) == 20:
+        return True
+    else:
+        return False
+
+print("Given two integers, return True if the sum of the integers is 20 or if one of the integer is 20. If not, return False.")
+print("### This is program number 3 - approach 1 ###")
+num1 = int(input("Enter a Number: "))
+num2 = int(input("Enter another Number: "))
+
+print(myfunc(num1, num2))
+
+#Test 3b - Approach 2
+def myfunc(num1, num2):
+    return num1 == 20 or num2 == 20 or (num1+num2) == 20
+
+print("### This is program number 3 - approach 2 ###")
+num1 = int(input("Enter a Number: "))
+num2 = int(input("Enter another Number: "))
+
+print(myfunc(num1, num2))
+
+=============================================================================================================================================================================================
+Lesson52.py
+
+'''
+Programming Practise using Functions - Level 1
+'''
+
+#**********************************************************************************************************#
+#OLD MACDONALD: Write a function that capitalizes the first and fourth letter of a Name.
+#**********************************************************************************************************#
+
+#Program - 1
+def myfuncFirstApproach(name):
+    first_letter = name[0]
+    inbetween = name[1:3]
+    fourth_letter = name[3]
+    rest = name[4:]
+    return first_letter.upper() + inbetween + fourth_letter.upper() + rest
+
+def myfuncSecondApproach(name):
+    FirstWord = name[:3]
+    SecondWord = name[3:]
+    return FirstWord.capitalize() + SecondWord.capitalize()
+
+print("Write a function that capitalizes the first and fourth letter of a Name.")
+print("### This is program number 1 - approach 1 ###")
+name = input("Enter a Name: ")
+
+print(myfuncFirstApproach(name))
+print(myfuncSecondApproach(name))
+
+#**********************************************************************************************************#
+#MASTER YODA: Give a sentence, return a sentence with the word reversed.
+#**********************************************************************************************************#
+
+#Program - 2
+def reverse_sentence(str):
+    mylist = str.split()
+    reverse_mylist = mylist[::-1]
+    return reverse_mylist
+
+print("Give a sentence, return a sentence with the word reversed.")
+print("### This is program number 2 - approach 1 ###")
+str = input("Enter a sentence: ")
+x = reverse_sentence(str)
+newstr = ' '.join(x)
+print(newstr)
+
+# ****************** JOIN Function ****************** #
+# mylist = ['a', 'b', 'c']
+# print('--'.join(mylist))
+# print(' '.join(mylist))
+# print('ooo'.join(mylist))
+
+#**********************************************************************************************************#
+#ALMOST THERE: Given an integer n, return True if n is within 10 of either 100 or 200.
+#**********************************************************************************************************#
+
+#Program - 3 Approach - 1
+def myfunc(userinput, level):
+    # print(userinput, level)
+    if userinput < level - 10:
+        return False
+    elif userinput > level + 10:
+        return False
+    else:
+        return True
+
+print("Given an integer n, return True if n is within 10 of either 100 or 200.")
+num = int(input("Enter a Number: "))
+x = myfunc(num, 100)
+y = myfunc(num, 200)
+print(x or y)
+
+
+# Program - 3 Approach - 2
+def myfunc(userinput):
+    return (abs(100 - userinput) <= 10) or (abs(200 - userinput) <= 10)
+    #abs (Absolute Value Function) returns the absolute value of a number.
+
+print("Given an integer n, return True if n is within 10 of either 100 or 200.")
+num = int(input("Enter a Number: "))
+print(myfunc(num))
+=============================================================================================================================================================================================
+Lesson53.py
+
+'''
+Programming Practise using Functions - Level 2
+'''
+
+#**********************************************************************************************************#
+#FIND 33: Given a list of integers, return True if the array contains a 3 next to a 3 somewhere.
+#**********************************************************************************************************#
+
+#Program - 1a Approach - 1
+def myfunc(myList):
+    for val in range(0, len(myList) - 1):
+        if myList[val] == 3 and myList[val+1] == 3:
+            return True
+            break
+    return False
+
+print("Given a list of integers, return True if the array contains a 3 next to a 3 somewhere - 1a")
+x = myfunc([1, 3, 3]) #returns True
+print(x)
+x = myfunc([1, 3, 1, 3]) #returns False
+print(x)
+x = myfunc([3, 1, 3, 3, 3, 1]) #returns False
+print(x)
+
+#Program - 1b Approach - 2
+def myfunc(myList):
+    for val in range(0, len(myList) - 1):
+        if myList[val:val+2] == [3,3]:  #Another way of writing myList[val] == 3 and myList[val+1] == 3:
+            return True
+            break
+    return False
+
+print("Given a list of integers, return True if the array contains a 3 next to a 3 somewhere - 1b")
+x = myfunc([1, 3, 3]) #returns True
+print(x)
+x = myfunc([1, 3, 1, 3]) #returns False
+print(x)
+x = myfunc([3, 1, 3, 3, 3, 1]) #returns False
+print(x)
+
+#**********************************************************************************************************#
+#PAPER DOLL: Given a string, return a string where for every character in the original there are three characters.
+#**********************************************************************************************************#
+
+#Program - 2 Approach - a & b
+def paper_dollFirstApproach(myList):
+    NewList = []
+    for letter in myList:
+        NewList.append(letter)
+        NewList.append(letter)
+        NewList.append(letter)
+    return ' '.join(NewList)  #converting a list to string
+
+def paper_dollSecondApproach(myList):
+    newStr = ""
+    for letter in myList:
+        newStr += letter * 3 # can also be written as newStr += letter + letter + letter
+    return ' '.join(newStr)  #converting a list to string
+
+print("Given a string, return a string where for every character in the original there are three characters - 2a")
+print(paper_dollFirstApproach('Hello'))
+print(paper_dollFirstApproach('Mississippi'))
+print("Given a string, return a string where for every character in the original there are three characters - 2b")
+print(paper_dollSecondApproach('Hello'))
+print(paper_dollSecondApproach('Mississippi'))
+
+#**********************************************************************************************************#
+#BLACk JACK: Given three integers between 1 and 11, if their sum is less than or equal to 21, return their sum.
+#If their sum exceeds 21 and there's an eleven, reduce the total sum by 10.
+#Finally, if the sum (even after adjustment) exceeds 21, return 'BUST'
+#**********************************************************************************************************#
+
+#Program - 3a Approach - 1
+def check_input(num):
+    if num >= 1 and num <= 11:
+        return True
+    else:
+        return False
+
+def check_sum(num1, num2, num3):
+    if check_input(num1) == True and check_input(num2) == True and check_input(num3) == True:
+        tot = num1 + num2 + num3
+        if tot <= 21:
+            return tot
+        else:
+            if num1 == 11 or num2 == 11 or num3 == 11:
+                tot = tot - 10
+                if tot <= 21:
+                    return tot
+                else:
+                    return "BUST"
+            else:
+                return "BUST"
+    else:
+        print("Invalid Inputs")
+        return 0
+
+print("Black Jack Program - 3 Approach 1")
+print(check_sum(5, 6, 7))
+print(check_sum(9, 9, 9))
+print(check_sum(9, 9, 11))
+
+#Program - 3b Approach - 2
+
+def blackjack(num1, num2, num3):
+    if sum([num1, num2, num3]) <= 21:
+        return sum([num1, num2, num3])
+    elif 11 in [num1, num2, num3] and sum([num1, num2, num3]) - 10 <= 21:
+        return sum([num1, num2, num3]) - 10
+    else:
+        return "BUST"
+print("Black Jack Program - 3 Approach 2")
+print(blackjack(5, 6, 7))
+print(blackjack(9, 9, 9))
+print(blackjack(9, 9, 11))
+
+#**********************************************************************************************************#
+#SUMMER OF 69: Return the sum of the numbers in the array, except ignore sections of numbers starting with
+#a 6 and extending to the next 9 (every 6 will be followed by at least one 9). Return 0 for no number.
+#**********************************************************************************************************#
+
+#Program - 4a Approach - 1
+
+def summer_69(myList):
+    sum = 0
+    flag = True
+    for i in range(0, len(myList)):
+        while flag == True:
+            if myList[i] != 6:
+                sum += myList[i]
+                break
+            else:
+                flag = False
+
+        while flag == False:
+            if myList[i] != 9:
+                break
+            else:
+                flag = True
+                break
+    return sum
+print("SUMMER OF 69 - Approach 1")
+print(summer_69([1, 3, 5]))
+print(summer_69([4, 5, 6, 7, 8, 9]))
+print(summer_69([2, 1, 6, 9, 11]))
+
+=============================================================================================================================================================================================
+Lesson54.py
+
+'''
+Programming Practise using Functions - Challenging Problems
+'''
+
+#**********************************************************************************************************#
+#SPY GAME: Write a function that takes in a list of integers and returns 'True' if it contains 007 in order.
+#**********************************************************************************************************#
+
+#Program - 1a Approach - 1
+def syp_game(myList):
+    str = []
+    for i in range(0, len(myList)):
+        if myList[i] == 0 or myList[i] == 7:
+            str.append(myList[i])
+        else:
+            continue
+    if str == [0, 0, 7]:
+        return True
+    else:
+        return False
+
+print("SYP GAME - Approach 1")
+print(syp_game([1, 2, 4, 0, 0, 7, 5]))
+print(syp_game([1, 0, 2, 4, 0, 5, 7]))
+print(syp_game([1, 7, 2, 0, 4, 5, 0]))
+
+#Program - 1b Approach - 2
+def syp_games(nums):
+    code = [0, 0, 7, 'x']
+    for num in nums:
+        if num == code[0]:
+            code.pop(0)
+    return len(code) == 1
+
+print("SYP GAME - Approach 2")
+print(syp_games([1, 2, 4, 0, 0, 7, 5]))
+print(syp_games([1, 0, 2, 4, 0, 5, 7]))
+print(syp_games([1, 7, 2, 0, 4, 5, 0]))
+
+#**********************************************************************************************************#
+#COUNT PRIME: Write a function that returns the number of prime numbers that exists up to and including a given number
+#**********************************************************************************************************#
+
+#Program - 1a Approach - 1
+def count_prime(num1, num2):
+    primeList = [0, 1]
+    z = True
+    for x in range(num1, num2):
+        #print(num1, num2)
+        for y in range (2, x):
+            #print(x, y)
+            if x % y == 0:
+                z = True
+                break
+            else:
+                z = False
+
+        if z == False:
+            primeList.append(x)
+    print(primeList)
+    return len(primeList)
+
+print("COUNT PRIME - Approach 1")
+print(count_prime(2, 100))
+
+# For more complex math and programming problems, visit the below website.
+# https://projecteuler.net/
+=============================================================================================================================================================================================
+Lesson134.py
+
+'''
+Sending Emails using Python.
+
+To send emails with Python, we need to manually go through the steps of connecting to an
+email server, confirming connection, setting a protocol, logging on and sending the message.
+The built-in smtplib library in python makes these steps simple function calls.
+Each major email provider (Gmail, Yahoo, Outlook, Hotmail, AT&T, Verizon, Comcast) have their
+own SMTP (Simple Mail Transfer Protocol) Server.
+For Gmail user, we need to generate an App Password instead of a Normal/Regular Password.
+This let's Gmail know that the Python Script attempting to access your account is authorized
+by you.
+'''
+import getpass
+import smtplib
+
+
+smtp_obj = smtplib.SMTP('smtp.gmail.com', 587)
+smtp_obj.ehlo()
+smtp_obj.startls()
+
+pwd = getpass.getpass("Enter the Password: ")
+
+
+=============================================================================================================================================================================================
+sample.py
+
+def myfunc(name):
+    print('Hello '+ name)
+
+myfunc('Naveen')
+
+def myfunc(value_bool):
+    if value_bool:
+        return('Hello')
+    else:
+        return('Goodbye')
+
+x = myfunc(0)
+print(x)
+
+def myfunc(*args):
+    mylist = []
+    for items in args:
+        if items % 2 == 0:
+            mylist.append(items)
+    return mylist
+
+x = myfunc(1, 2, 3, 4, 5, 6, 7, 8, 9)
+print(x)
+
+
+def myfunc(*args):
+    #print(args)
+    mystr = ""
+    i = 0
+    #print(len(args[0]))
+    for i in range(0, len(args[0])):
+        #print(args[0][i])
+        if i % 2 == 0:
+            mystr += args[0][i].upper()
+        else:
+            mystr += args[0][i].lower()
+        i += 1
+    return mystr
+
+x = myfunc('Anthropomorphism')
+print(x)
+
+
+def myfunc(*args):
+    result = ""
+    for index, letter in enumerate(*args):
+        if index % 2 == 0:
+            result += letter.lower()
+        else:
+            result += letter.upper()
+    return result
+
+x = myfunc('Anthropomorphism')
+print(x)
