@@ -1,5 +1,6 @@
 # Production AI & LLM Engineering Bootcamp
 ## Induction Session Notes
+https://advancedroute.krishnaik.cloud/
 **Date:** July 19, 2026  
 **Duration:** Approximately 7-8 months  
 **Mentors:** Krish Naik, Paul, Divesh
